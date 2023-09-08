@@ -30,6 +30,13 @@ module.exports = function userRouter() {
             return res.json({message: `Internal Server Error ${err}`});
         }
     })
+    userRoutes.route('/:username')
+    .get(async (req, res) => {
+        const {username} = req.params;
+        const user = await User.findOne({username})
+        log(user);
+        res.json(user)
+    })
 
     return userRoutes;
 }

@@ -19,6 +19,12 @@ module.exports = function pageRoutes() {
     res.status(200);
     return res.render("register");
   });
+
+  pageRouter.route('/pages/login')
+  .get((req, res) => {
+    res.status(200);
+    return res.render('login');
+  })
 return pageRouter;
 };
 

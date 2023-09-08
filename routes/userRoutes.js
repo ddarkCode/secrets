@@ -1,9 +1,9 @@
 const {Router} = require('express');
-const md5 = require('md5');
 const User = require('../database/userModel');
+const {hash, compare} = require('bcrypt');
 
 const log = console.log;
-
+const {SALT_ROUND} = process.env
 
 module.exports = function userRouter() {
     const userRoutes = Router();
@@ -16,10 +16,10 @@ module.exports = function userRouter() {
             const userExists = await User.findOne({username});
 
             if (!userExists)  {
-                const hashedPassword = md5(password);
+                const hashedPassword = await hash(password, +SALT_ROUND);
                 const newUser = new User({username, password: hashedPassword});
                 await newUser.save();
-                res.status(201);
+                res.status(302);
                 return res.redirect('/pages/secrets');
             } else {
                 res.status(403);
@@ -34,18 +34,18 @@ module.exports = function userRouter() {
     userRoutes.route('/login')
     .post( async (req, res) => {
         let {username, password} = req.body;
-        const hashedPassword = md5(password);
       try {
         const foundUser = await User.findOne({username})
         if (!foundUser) {
             res.status(404);
             return res.json({message: 'User Not Found'});
         } else {
-            if (foundUser.password === hashedPassword) {
-                res.status(200);
-                return res.redirect('/pages/secrets');
+            const isCorrectPassword = await compare(password, foundUser.password);
+            if (isCorrectPassword) {
+                res.status(302);
+                return res.redirect('/pages/secrets')
             } else {
-                res.status(403);
+                res.status(401);
                 return res.json({message: 'Wrong Username Or Password'});
             }
         }

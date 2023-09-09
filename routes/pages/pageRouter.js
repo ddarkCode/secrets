@@ -10,9 +10,20 @@ module.exports = function pageRoutes() {
     return res.render("home");
   });
 
-  pageRouter.route("/pages/secrets").get((req, res) => {
+  pageRouter.route('/pages/submit')
+  .get((req, res) => {
     res.status(200);
-    return res.render("secrets");
+    res.render('submit')
+  })
+
+  pageRouter.route("/pages/secrets").get((req, res) => {
+    if (req.isAuthenticated())  {
+      res.status(200);
+      return res.render('secrets');
+    } else {
+      res.status(302);
+      res.redirect('/pages/login')
+    }
   });
 
   pageRouter.route("/pages/register").get((req, res) => {

@@ -22,7 +22,6 @@ function Signup() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-
     setUser((prevState) => ({ ...prevState, [name]: value }));
   }
   function handleSubmit(e) {
@@ -40,18 +39,19 @@ function Signup() {
           <Link to="/pages/signup">Don't Have An Account? Signup</Link>
           <Form onSubmit={handleSubmit}>
             <Input
+              text={'email'}
               type={'email'}
-              text="email"
-              onChange={handleChange}
               value={user.email}
+              onChange={handleChange}
             />
 
             <Input
+              text={'password'}
               type={'password'}
-              text="password"
-              onChange={handleChange}
               value={user.password}
+              onChange={handleChange}
             />
+
             <button type="submit" className="btn btn-dark">
               Signin
             </button>

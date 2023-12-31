@@ -30,3 +30,25 @@
   letter-spacing: 2;
   line-height: 1.7;
 }
+
+@media only screen and (max-width: 1000px) {
+  #google-button {
+    width: 95vw;
+    height: 150px;
+  }
+
+  #google-button div {
+    width: 20%;
+    height: 150px;
+  }
+  #google-button span {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    letter-spacing: 2;
+    line-height: 1.7;
+  }
+}

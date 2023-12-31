@@ -23,10 +23,12 @@ export default () => {
         if (req.isAuthenticated()) {
           const { secret } = req.body;
           const { username } = req.user;
-          const newSecret = await Secret.create({
+          const newSecret = new Secret({
             secret,
             username,
           });
+
+          await newSecret.save();
 
           return res.status(201).json(newSecret);
         } else {

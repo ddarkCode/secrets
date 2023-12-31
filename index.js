@@ -32,7 +32,6 @@ const limiter = rateLimit({
   limit: 100,
   standardHeaders: 'draft-7',
   legacyHeaders: false,
-  validate: { trustProxy: true },
 });
 const mongoSessionStore = new MongoDBStoreSession({
   uri: MONGO_CLOUD,
@@ -54,7 +53,6 @@ app.use(
 passportConfig(app);
 
 // Middleware
-app.set('trust proxy', true);
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

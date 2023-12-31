@@ -12,10 +12,12 @@ export default () => {
         next(err);
       }
       req.login(user, (err) => {
-        if (next(err));
+        if (err) {
+          next(err);
+        }
+        const { email, _id, username, createdAt } = user;
+        return res.status(201).json({ email, _id, username, createdAt });
       });
-      const { email, _id, username, createdAt } = user;
-      return res.status(201).json({ email, _id, username, createdAt });
     })(req, res, next);
   });
 
@@ -39,7 +41,7 @@ export default () => {
       if (err) {
         next(err);
       }
-      res.status(200).json(null);
+      return res.status(200).json(null);
     });
   });
   authRouter.route('/profile').get((req, res, next) => {
@@ -47,7 +49,7 @@ export default () => {
       const { email, _id, username, createdAt } = req.user;
       return res.status(200).json({ email, _id, username, createdAt });
     } else {
-      res.status(403).json(null);
+      return res.status(200).json(null);
     }
   });
   authRouter

@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  border-right: 1px solid #e8ecef;
+  border-right: 1px solid #000;
 }
 
 .input-container input {
@@ -24,5 +24,22 @@
   outline: none;
 }
 .input-container:first-child {
-  border-bottom: 1px solid #e8ecef;
+  border-bottom: 1px solid #000;
+}
+
+@media only screen and (max-width: 1000px) {
+  .input-container {
+    width: 95vw;
+  }
+  .input-container label {
+    font-size: 2em;
+    font-weight: 400;
+    width: 25%;
+    height: 150px;
+  }
+  .input-container input {
+    width: 75%;
+    height: 150px;
+    font-size: 2.5em;
+  }
 }

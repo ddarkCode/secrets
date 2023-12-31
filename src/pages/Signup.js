@@ -14,6 +14,7 @@ function Signup() {
     email: '',
     password: '',
   });
+
   const dispatch = useDispatch();
   const history = useHistory();
   const u = useSelector((state) => state.auth.user);
@@ -38,18 +39,18 @@ function Signup() {
           <Link to="/pages/signin">Already Have An Account? Signin</Link>
           <Form onSubmit={handleSubmit}>
             <Input
+              text={'email'}
               type={'email'}
-              text="email"
-              onChange={handleChange}
               value={user.email}
+              onChange={handleChange}
+            />
+            <Input
+              text={'password'}
+              type={'password'}
+              value={user.password}
+              onChange={handleChange}
             />
 
-            <Input
-              type={'password'}
-              text="password"
-              onChange={handleChange}
-              value={user.password}
-            />
             <button type="submit" className="btn btn-dark">
               Signup
             </button>

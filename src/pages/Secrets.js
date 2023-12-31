@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -11,19 +11,22 @@ import Secret from '../components/Secret';
 import '../css/Secrets.css';
 
 function Secrets() {
+  const [disButton, setDisButton] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     dispatch(getAllSecrets());
   }, []);
+
   function handleSignout() {
+    setDisButton(true);
     dispatch(signout());
+    console.log('Signing out');
     history.push('/pages/signin');
   }
 
   const secrets = useSelector((state) => state.secrets.secrets);
-  console.log(secrets);
 
   return (
     <div className="secrets-main-page">
@@ -37,7 +40,11 @@ function Secrets() {
       <hr />
 
       <div className="links">
-        <button className="signout light" onClick={handleSignout}>
+        <button
+          disabled={disButton}
+          className="signout light"
+          onClick={handleSignout}
+        >
           Signout
         </button>
 
@@ -56,6 +63,6 @@ function Secrets() {
 }
 
 export default {
-  component: Secrets,
+  component: authenticate(Secrets),
   loadData: (store) => store.dispatch(getAllSecrets()),
 };

@@ -13,6 +13,7 @@ function Input({ type, text, onChange, value }) {
         name={text}
         value={value}
         onChange={onChange}
+        required
       />
     </div>
   );

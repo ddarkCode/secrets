@@ -52,5 +52,5 @@ function Submit() {
 }
 
 export default {
-  component: Submit,
+  component: authenticate(Submit),
 };

@@ -1,6 +1,6 @@
 # Project: Secrets
 
-This App is a Server Side Rendered Application built using react/expressjs and mongodb for database.
+Secrets is a Server Side Rendered Application built using react/expressjs and mongodb for database.
 
 # website:
 

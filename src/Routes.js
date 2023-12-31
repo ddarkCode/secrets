@@ -4,6 +4,7 @@ import Secrets from './pages/Secrets';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Submit from './pages/Submit';
+import NotFoundPage from './pages/NotFoundPage';
 
 export default [
   {
@@ -29,6 +30,9 @@ export default [
       {
         ...Submit,
         path: '/pages/submit',
+      },
+      {
+        component: NotFoundPage,
       },
     ],
   },

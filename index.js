@@ -35,7 +35,7 @@ const limiter = rateLimit({
   validate: { trustProxy: true },
 });
 const mongoSessionStore = new MongoDBStoreSession({
-  uri: MONGO_LOCAL,
+  uri: MONGO_CLOUD,
   collection: 'secretsSessions',
 });
 
@@ -72,8 +72,6 @@ app.use('/api/auth', auth());
 app.use('/api/secrets', secretRoutes());
 
 app.get('*', (req, res) => {
-  // const blogId = req.originalUrl.split('/')[2];
-
   const store = createStore();
   const promises = matchRoutes(Routes, req.path).map(({ route, match }) => {
     return route.loadData ? route.loadData(store) : Promise.resolve(null);
@@ -101,7 +99,7 @@ app.listen(PORT, () => {
 
   (async function connectDatabase() {
     try {
-      await connect(MONGO_LOCAL);
+      await connect(MONGO_CLOUD);
       log('Database Connected Successfully.');
     } catch (err) {
       log(

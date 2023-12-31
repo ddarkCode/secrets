@@ -54,7 +54,7 @@ app.use(
 passportConfig(app);
 
 // Middleware
-
+app.set('trust proxy', true);
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

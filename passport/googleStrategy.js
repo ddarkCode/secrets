@@ -17,7 +17,8 @@ export default function googleStrategy() {
       {
         clientID: GOOGLE_CLIENT_ID,
         clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://localhost:4444/api/auth/google/secrets',
+        callbackURL:
+          'https://secrets-3r6m.onrender.com/api/auth/google/secrets',
         passReqToCallback: true,
       },
       function (req, accessToken, refreshToken, profile, done) {

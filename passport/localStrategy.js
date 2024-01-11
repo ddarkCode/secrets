@@ -21,7 +21,10 @@ export default function localStrategy() {
           const foundUser = await User.findOne({ email });
 
           if (foundUser) {
-            throw new Error('User With This Email Already Exist.');
+            return done(
+              { message: 'User With This Email Already Exist.', status: 403 },
+              false
+            );
           }
 
           const user = new User({
@@ -52,11 +55,14 @@ export default function localStrategy() {
         try {
           const user = await User.findOne({ email });
           if (!user) {
-            throw new Error('User Not Found.');
+            return done({ message: 'User Not Found.', status: 404 }, false);
           }
 
           if (!user.validatePassword(password)) {
-            throw new Error('Wrong Password Provided.');
+            return done(
+              { message: 'Wrong Password Provided.', status: 401 },
+              false
+            );
           }
 
           return done(null, user, { message: 'Successfully Logged In.' });
